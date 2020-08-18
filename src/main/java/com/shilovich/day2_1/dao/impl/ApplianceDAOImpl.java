@@ -11,6 +11,7 @@ import com.shilovich.day2_1.entity.Appliance;
 import com.shilovich.day2_1.entity.criteria.Criteria;
 
 import java.util.List;
+import java.util.Map;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
 
@@ -22,12 +23,29 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
         ParserDAOFactory parserFactory = ParserDAOFactory.getInstance();
         ParserDAO parserDAO = parserFactory.getParserDAO();
-        List<Appliance> parse = parserDAO.parse(applianceListString);
-        for (Appliance appliance : parse) {
-            System.out.println(appliance);
-        }
+        Map<String, Object> criteriaMap = criteria.getCriteria();
+        for (String string : applianceListString) {
 
-        return null;
+            Map<String, String> stringMap = parserDAO.parseString(string);
+            int criteriaMapSize = criteriaMap.size();
+            int counter = 0;
+
+            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if (criteriaMap.containsKey(key) && criteriaMap.get(key).equals(value)) {
+                    counter++;
+                }
+            }
+
+            if (criteriaMapSize == counter) {
+                Appliance appliance = parserDAO.parseList(stringMap);
+                System.out.println(appliance);
+                return appliance;
+            }
+
+        }
+        return new Appliance();
     }
 
     // you may add your own code here

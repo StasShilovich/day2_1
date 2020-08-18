@@ -24,10 +24,6 @@ public class Criteria {
 		return criteria;
 	}
 
-	public void setCriteria(Map<String, Object> criteria) {
-		this.criteria = criteria;
-	}
-
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder("Criteria{");
