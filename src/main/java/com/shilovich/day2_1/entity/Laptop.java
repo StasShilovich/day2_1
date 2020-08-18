@@ -8,6 +8,18 @@ public class Laptop extends Appliance {
     private double cpu;
     private int displayInches;
 
+    public Laptop(double batteryCapacity, String os, long memoryRom, int systemMemory, double cpu, int displayInches) {
+        this.batteryCapacity = batteryCapacity;
+        this.os = os;
+        this.memoryRom = memoryRom;
+        this.systemMemory = systemMemory;
+        this.cpu = cpu;
+        this.displayInches = displayInches;
+    }
+
+    public Laptop() {
+    }
+
     public double getBatteryCapacity() {
         return batteryCapacity;
     }

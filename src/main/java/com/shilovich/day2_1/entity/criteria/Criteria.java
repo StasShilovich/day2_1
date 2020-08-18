@@ -19,7 +19,21 @@ public class Criteria {
 	public void add(String searchCriteria, Object value) {
 		criteria.put(searchCriteria, value);
 	}
-	
-	// you may add your own code here
 
+	public Map<String, Object> getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(Map<String, Object> criteria) {
+		this.criteria = criteria;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("Criteria{");
+		sb.append("groupSearchName='").append(groupSearchName).append('\'');
+		sb.append(", criteria=").append(criteria);
+		sb.append('}');
+		return sb.toString();
+	}
 }

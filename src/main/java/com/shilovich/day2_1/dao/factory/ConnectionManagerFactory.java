@@ -1,7 +1,7 @@
 package com.shilovich.day2_1.dao.factory;
 
-import com.shilovich.day2_1.dao.ConnectionManager;
-import com.shilovich.day2_1.dao.connection.ConnectionManagerImpl;
+import com.shilovich.day2_1.dao.connection.ConnectionManager;
+import com.shilovich.day2_1.dao.connection.impl.ConnectionManagerImpl;
 
 public final class ConnectionManagerFactory {
     private static final ConnectionManagerFactory instance = new ConnectionManagerFactory();

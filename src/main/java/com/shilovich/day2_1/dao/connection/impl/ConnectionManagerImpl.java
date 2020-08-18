@@ -1,6 +1,6 @@
-package com.shilovich.day2_1.dao.connection;
+package com.shilovich.day2_1.dao.connection.impl;
 
-import com.shilovich.day2_1.dao.ConnectionManager;
+import com.shilovich.day2_1.dao.connection.ConnectionManager;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;

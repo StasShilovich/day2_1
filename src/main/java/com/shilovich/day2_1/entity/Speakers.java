@@ -6,6 +6,16 @@ public class Speakers extends Appliance {
     private String frequencyRange;
     private int cordLength;
 
+    public Speakers(int powerConsumption, int numberOfSpeakers, String frequencyRange, int cordLength) {
+        this.powerConsumption = powerConsumption;
+        this.numberOfSpeakers = numberOfSpeakers;
+        this.frequencyRange = frequencyRange;
+        this.cordLength = cordLength;
+    }
+
+    public Speakers() {
+    }
+
     public int getPowerConsumption() {
         return powerConsumption;
     }
