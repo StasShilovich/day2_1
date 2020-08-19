@@ -23,26 +23,27 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
         ParserDAOFactory parserFactory = ParserDAOFactory.getInstance();
         ParserDAO parserDAO = parserFactory.getParserDAO();
+        parserDAO.parseList(criteria.getCriteria())
         Map<String, Object> criteriaMap = criteria.getCriteria();
         for (String string : applianceListString) {
 
-            Map<String, String> stringMap = parserDAO.parseString(string);
-            int criteriaMapSize = criteriaMap.size();
-            int counter = 0;
-
-            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
-                String key = entry.getKey();
-                String value = entry.getValue();
-                if (criteriaMap.containsKey(key) && criteriaMap.get(key).equals(value)) {
-                    counter++;
-                }
-            }
-
-            if (criteriaMapSize == counter) {
-                Appliance appliance = parserDAO.parseList(stringMap);
-                System.out.println(appliance);
-                return appliance;
-            }
+            Appliance appliance1 = parserDAO.parseString(string);
+//            int criteriaMapSize = criteriaMap.size();
+//            int counter = 0;
+//
+//            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
+//                String key = entry.getKey();
+//                String value = entry.getValue();
+//                if (criteriaMap.containsKey(key) && criteriaMap.get(key).equals(value)) {
+//                    counter++;
+//                }
+//            }
+//
+//            if (criteriaMapSize == counter) {
+//                Appliance appliance = parserDAO.parseList(stringMap);
+//                System.out.println(appliance);
+//                return appliance;
+//            }
 
         }
         return new Appliance();

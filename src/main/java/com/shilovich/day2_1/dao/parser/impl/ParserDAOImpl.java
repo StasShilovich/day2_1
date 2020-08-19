@@ -33,7 +33,7 @@ public class ParserDAOImpl implements ParserDAO {
 
 
     @Override
-    public Map<String, String> parseString(String string) throws DaoException {
+    public Appliance parseString(String string) throws DaoException {
         try {
             String[] split = string.split(COLON);
             Map<String, String> stringMap = new HashMap<>();
@@ -43,14 +43,14 @@ public class ParserDAOImpl implements ParserDAO {
                 String[] object = data[i].split(EQUAL);
                 stringMap.put(object[FIRST_ELEMENT_INDEX].trim(), object[object.length - 1].trim());
             }
-            return stringMap;
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            return parseList(stringMap);
+        } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new DaoException(e.getMessage());
         }
     }
 
-    @Override
-    public Appliance parseList(Map<String, String> stringMap) throws NumberFormatException {
+
+    private Appliance parseList(Map<String, String> stringMap) {
         switch (stringMap.get(APPLIANCE_NAME)) {
             case "Laptop":
                 return parseToLaptop(stringMap);
@@ -69,7 +69,7 @@ public class ParserDAOImpl implements ParserDAO {
         }
     }
 
-    private Appliance parseToVacuumCleaner(Map<String, String> stringMap) throws NumberFormatException {
+    private Appliance parseToVacuumCleaner(Map<String, String> stringMap) {
         VacuumCleaner vacuumCleaner = new VacuumCleaner();
         vacuumCleaner.setPowerConsumption(Integer.parseInt(stringMap.get(POWER_CONSUMPTION.toString())));
         vacuumCleaner.setFilterType(stringMap.get(FILTER_TYPE.toString()));
@@ -80,55 +80,55 @@ public class ParserDAOImpl implements ParserDAO {
         return vacuumCleaner;
     }
 
-    private Appliance parseToTablePC(Map<String, String> criteria) throws NumberFormatException {
+    private Appliance parseToTablePC(Map<String, String> stringMap) {
         TabletPC tabletPC = new TabletPC();
-        tabletPC.setBatteryCapacity(Double.parseDouble(criteria.get(BATTERY_CAPACITY.toString())));
-        tabletPC.setDisplayInches(Integer.parseInt(criteria.get(DISPLAY_INCHES.toString())));
-        tabletPC.setMemoryRom(Long.parseLong(criteria.get(MEMORY_ROM.toString())));
-        tabletPC.setFlashMemoryCapacity(Integer.parseInt(criteria.get(FLASH_MEMORY_CAPACITY.toString())));
-        tabletPC.setColor(criteria.get(COLOR.toString()));
+        tabletPC.setBatteryCapacity(Double.parseDouble(stringMap.get(BATTERY_CAPACITY.toString())));
+        tabletPC.setDisplayInches(Integer.parseInt(stringMap.get(DISPLAY_INCHES.toString())));
+        tabletPC.setMemoryRom(Long.parseLong(stringMap.get(MEMORY_ROM.toString())));
+        tabletPC.setFlashMemoryCapacity(Integer.parseInt(stringMap.get(FLASH_MEMORY_CAPACITY.toString())));
+        tabletPC.setColor(stringMap.get(COLOR.toString()));
         return tabletPC;
     }
 
-    private Appliance parseToSpeakers(Map<String, String> criteria) throws NumberFormatException {
+    private Appliance parseToSpeakers(Map<String, String> stringMap) {
         Speakers speakers = new Speakers();
-        speakers.setPowerConsumption(Integer.parseInt(criteria.get(POWER_CONSUMPTION.toString())));
-        speakers.setNumberOfSpeakers(Integer.parseInt(criteria.get(NUMBER_OF_SPEAKERS.toString())));
-        speakers.setFrequencyRange(criteria.get(FREQUENCY_RANGE.toString()));
-        speakers.setCordLength(Integer.parseInt(criteria.get(CORD_LENGTH.toString())));
+        speakers.setPowerConsumption(Integer.parseInt(stringMap.get(POWER_CONSUMPTION.toString())));
+        speakers.setNumberOfSpeakers(Integer.parseInt(stringMap.get(NUMBER_OF_SPEAKERS.toString())));
+        speakers.setFrequencyRange(stringMap.get(FREQUENCY_RANGE.toString()));
+        speakers.setCordLength(Integer.parseInt(stringMap.get(CORD_LENGTH.toString())));
         return speakers;
     }
 
-    private Appliance parseToRefrigerator(Map<String, String> criteria) throws NumberFormatException {
+    private Appliance parseToRefrigerator(Map<String, String> stringMap) {
         Refrigerator refrigerator = new Refrigerator();
-        refrigerator.setPowerConsumption(Integer.parseInt(criteria.get(POWER_CONSUMPTION.toString())));
-        refrigerator.setWeight(Integer.parseInt(criteria.get(WEIGHT.toString())));
-        refrigerator.setFreezerCapacity(Integer.parseInt(criteria.get(FREQUENCY_RANGE.toString())));
-        refrigerator.setOverallCapacity(Double.parseDouble(criteria.get(OVERALL_CAPACITY.toString())));
-        refrigerator.setHeight(Double.parseDouble(criteria.get(HEIGHT.toString())));
-        refrigerator.setWeight(Integer.parseInt(criteria.get(WIDTH.toString())));
+        refrigerator.setPowerConsumption(Integer.parseInt(stringMap.get(POWER_CONSUMPTION.toString())));
+        refrigerator.setWeight(Integer.parseInt(stringMap.get(WEIGHT.toString())));
+        refrigerator.setFreezerCapacity(Integer.parseInt(stringMap.get(FREQUENCY_RANGE.toString())));
+        refrigerator.setOverallCapacity(Double.parseDouble(stringMap.get(OVERALL_CAPACITY.toString())));
+        refrigerator.setHeight(Double.parseDouble(stringMap.get(HEIGHT.toString())));
+        refrigerator.setWeight(Integer.parseInt(stringMap.get(WIDTH.toString())));
         return refrigerator;
     }
 
-    private Appliance parseToOven(Map<String, String> criteria) throws NumberFormatException {
+    private Appliance parseToOven(Map<String, String> stringMap) {
         Oven oven = new Oven();
-        oven.setPowerConsumption(Integer.parseInt(criteria.get(POWER_CONSUMPTION.toString())));
-        oven.setWeight(Integer.parseInt(criteria.get(WEIGHT.toString())));
-        oven.setCapacity(Integer.parseInt(criteria.get(CAPACITY.toString())));
-        oven.setDepth(Integer.parseInt(criteria.get(DEPTH.toString())));
-        oven.setHeight(Double.parseDouble(criteria.get(HEIGHT.toString())));
-        oven.setWidth(Double.parseDouble(criteria.get(WIDTH.toString())));
+        oven.setPowerConsumption(Integer.parseInt(stringMap.get(POWER_CONSUMPTION.toString())));
+        oven.setWeight(Integer.parseInt(stringMap.get(WEIGHT.toString())));
+        oven.setCapacity(Integer.parseInt(stringMap.get(CAPACITY.toString())));
+        oven.setDepth(Integer.parseInt(stringMap.get(DEPTH.toString())));
+        oven.setHeight(Double.parseDouble(stringMap.get(HEIGHT.toString())));
+        oven.setWidth(Double.parseDouble(stringMap.get(WIDTH.toString())));
         return oven;
     }
 
-    private Appliance parseToLaptop(Map<String, String> criteria) throws NumberFormatException {
+    private Appliance parseToLaptop(Map<String, String> stringMap) {
         Laptop laptop = new Laptop();
-        laptop.setBatteryCapacity(Double.parseDouble(criteria.get(BATTERY_CAPACITY.toString())));
-        laptop.setOs(criteria.get(OS.toString()));
-        laptop.setMemoryRom(Long.parseLong(criteria.get(MEMORY_ROM.toString())));
-        laptop.setSystemMemory(Integer.parseInt(criteria.get(SYSTEM_MEMORY.toString())));
-        laptop.setCpu(Double.parseDouble(criteria.get(CPU.toString())));
-        laptop.setDisplayInches(Integer.parseInt(criteria.get(DISPLAY_INCHS.toString())));
+        laptop.setBatteryCapacity(Double.parseDouble(stringMap.get(BATTERY_CAPACITY.toString())));
+        laptop.setOs(stringMap.get(OS.toString()));
+        laptop.setMemoryRom(Long.parseLong(stringMap.get(MEMORY_ROM.toString())));
+        laptop.setSystemMemory(Integer.parseInt(stringMap.get(SYSTEM_MEMORY.toString())));
+        laptop.setCpu(Double.parseDouble(stringMap.get(CPU.toString())));
+        laptop.setDisplayInches(Integer.parseInt(stringMap.get(DISPLAY_INCHS.toString())));
         return laptop;
     }
 }
