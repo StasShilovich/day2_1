@@ -56,21 +56,21 @@ public class Speakers implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                result = true;
+                count++;
             } else if (NUMBER_OF_SPEAKERS.toString().equals(key) && value.equals(numberOfSpeakers)) {
-                result = true;
-            } else if (FREQUENCY_RANGE.toString().equals(key) && value.equals(frequencyRange)) {
-                result = true;
+                count++;
+            } else if (FREQUENCY_RANGE.toString().equals(key) && frequencyRange.equalsIgnoreCase((String) value)) {
+                count++;
             } else if (CORD_LENGTH.toString().equals(key) && value.equals(cordLength)) {
-                result = true;
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override

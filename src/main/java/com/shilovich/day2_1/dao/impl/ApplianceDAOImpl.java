@@ -1,6 +1,5 @@
 package com.shilovich.day2_1.dao.impl;
 
-
 import com.shilovich.day2_1.dao.ApplianceDAO;
 import com.shilovich.day2_1.dao.FileReaderDAO;
 import com.shilovich.day2_1.dao.exception.DaoException;
@@ -18,7 +17,6 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         DAOFactory factory = DAOFactory.getInstance();
         FileReaderDAO readerDAO = factory.getReaderDAO();
         List<String> applianceListString = readerDAO.receive(criteria.getGroupSearchName());
-
         ParserDAO parserDAO = factory.getParserDAO();
         Appliance result = null;
         for (String string : applianceListString) {
@@ -29,10 +27,4 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         }
         return result;
     }
-
-    // you may add your own code here
-
 }
-
-
-//you may add your own new classes

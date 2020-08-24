@@ -76,25 +76,25 @@ public class VacuumCleaner implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                result = true;
-            } else if (FILTER_TYPE.toString().equals(key) && value.equals(filterType)) {
-                result = true;
-            } else if (BAG_TYPE.toString().equals(key) && value.equals(bagType)) {
-                result = true;
-            } else if (WAND_TYPE.toString().equals(key) && value.equals(wandType)) {
-                result = true;
+                count++;
+            } else if (FILTER_TYPE.toString().equals(key) && filterType.equalsIgnoreCase((String) value)) {
+                count++;
+            } else if (BAG_TYPE.toString().equals(key) && bagType.equalsIgnoreCase((String) value)) {
+                count++;
+            } else if (WAND_TYPE.toString().equals(key) && wandType.equalsIgnoreCase((String) value)) {
+                count++;
             } else if (MOTOR_SPEED_REGULATION.toString().equals(key) && value.equals(motorSpeedRegulation)) {
-                result = true;
+                count++;
             } else if (CLEANING_WIDTH.toString().equals(key) && value.equals(cleaningWidth)) {
-                result = true;
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override

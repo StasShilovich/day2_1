@@ -76,25 +76,25 @@ public class Refrigerator implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                result = true;
+                count++;
             } else if (WEIGHT.toString().equals(key) && value.equals(weight)) {
-                result = true;
+                count++;
             } else if (FREEZER_CAPACITY.toString().equals(key) && value.equals(freezerCapacity)) {
-                result = true;
+                count++;
             } else if (OVERALL_CAPACITY.toString().equals(key) && value.equals(overallCapacity)) {
-                result = true;
+                count++;
             } else if (HEIGHT.toString().equals(key) && value.equals(height)) {
-                result = true;
+                count++;
             } else if (WIDTH.toString().equals(key) && value.equals(width)) {
-                result = true;
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override

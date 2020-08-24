@@ -8,7 +8,6 @@ import com.shilovich.day2_1.entity.impl.*;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: 18.08.2020 refactor static import
 import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Laptop.*;
 import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Laptop.BATTERY_CAPACITY;
 import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Laptop.MEMORY_ROM;

@@ -6,9 +6,6 @@ import com.shilovich.day2_1.entity.Appliance;
 public class PrintApplianceInfo {
 
     public static void print(Appliance appliance) {
-        System.out.println(appliance);
+        System.out.println("Appliance: " + appliance);
     }
-
-    // you may add your own code here
-
 }

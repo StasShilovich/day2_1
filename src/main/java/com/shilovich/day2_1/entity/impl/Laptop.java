@@ -76,25 +76,25 @@ public class Laptop implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
-                result = true;
-            } else if (OS.toString().equals(key) && value.equals(os)) {
-                result = true;
+                count++;
+            } else if (OS.toString().equals(key) && os.equalsIgnoreCase((String) value)) {
+                count++;
             } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
-                result = true;
+                count++;
             } else if (SYSTEM_MEMORY.toString().equals(key) && value.equals(systemMemory)) {
-                result = true;
+                count++;
             } else if (CPU.toString().equals(key) && value.equals(cpu)) {
-                result = true;
+                count++;
             } else if (DISPLAY_INCHS.toString().equals(key) && value.equals(displayInches)) {
-                result = true;
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override

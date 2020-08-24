@@ -18,7 +18,7 @@ public class FileReaderDAOImpl implements FileReaderDAO {
 
     @Override
     public List<String> receive(String criteriaName) throws DaoException {
-        DAOFactory factory=DAOFactory.getInstance();
+        DAOFactory factory = DAOFactory.getInstance();
         ConnectionManager manager = factory.getConnectionManager();
         String filePath = manager.getProperty(FILE_PATH);
 

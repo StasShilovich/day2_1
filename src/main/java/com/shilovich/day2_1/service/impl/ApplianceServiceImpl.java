@@ -1,6 +1,5 @@
 package com.shilovich.day2_1.service.impl;
 
-
 import com.shilovich.day2_1.dao.ApplianceDAO;
 import com.shilovich.day2_1.dao.exception.DaoException;
 import com.shilovich.day2_1.dao.factory.DAOFactory;
@@ -24,18 +23,12 @@ public class ApplianceServiceImpl implements ApplianceService {
         DAOFactory factory = DAOFactory.getInstance();
         ApplianceDAO applianceDAO = factory.getApplianceDAO();
 
-        Appliance appliance = null;
+        Appliance appliance;
         try {
             appliance = applianceDAO.find(criteria);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
-
-        // you may add your own code here
-
         return appliance;
     }
-
 }
-
-//you may add your own new classes

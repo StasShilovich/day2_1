@@ -76,25 +76,25 @@ public class Oven implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                result = true;
+                count++;
             } else if (WEIGHT.toString().equals(key) && value.equals(weight)) {
-                result = true;
+                count++;
             } else if (CAPACITY.toString().equals(key) && value.equals(capacity)) {
-                result = true;
+                count++;
             } else if (DEPTH.toString().equals(key) && value.equals(depth)) {
-                result = true;
+                count++;
             } else if (HEIGHT.toString().equals(key) && value.equals(height)) {
-                result = true;
+                count++;
             } else if (WIDTH.toString().equals(key) && value.equals(width)) {
-                result = true;
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override

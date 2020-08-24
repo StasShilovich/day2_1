@@ -66,23 +66,23 @@ public class TabletPC implements Appliance {
 
     @Override
     public boolean accordToAppliance(Map<String, Object> data) {
-        boolean result = false;
+        int count = 0;
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
-                result = true;
+                count++;
             } else if (DISPLAY_INCHES.toString().equals(key) && value.equals(displayInches)) {
-                result = true;
+                count++;
             } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
-                result = true;
+                count++;
             } else if (FLASH_MEMORY_CAPACITY.toString().equals(key) && value.equals(flashMemoryCapacity)) {
-                result = true;
-            } else if (COLOR.toString().equals(key) && value.equals(color)) {
-                result = true;
+                count++;
+            } else if (COLOR.toString().equals(key) && color.equalsIgnoreCase((String) value)) {
+                count++;
             }
         }
-        return result;
+        return count == data.size();
     }
 
     @Override
