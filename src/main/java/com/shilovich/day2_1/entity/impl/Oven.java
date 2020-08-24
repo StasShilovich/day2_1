@@ -1,6 +1,12 @@
-package com.shilovich.day2_1.entity;
+package com.shilovich.day2_1.entity.impl;
 
-public class Oven extends Appliance {
+import com.shilovich.day2_1.entity.Appliance;
+
+import java.util.Map;
+
+import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Oven.*;
+
+public class Oven implements Appliance {
     private int powerConsumption;
     private int weight;
     private int capacity;
@@ -66,6 +72,29 @@ public class Oven extends Appliance {
 
     public void setWidth(double width) {
         this.width = width;
+    }
+
+    @Override
+    public boolean accordToAppliance(Map<String, Object> data) {
+        boolean result = false;
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
+                result = true;
+            } else if (WEIGHT.toString().equals(key) && value.equals(weight)) {
+                result = true;
+            } else if (CAPACITY.toString().equals(key) && value.equals(capacity)) {
+                result = true;
+            } else if (DEPTH.toString().equals(key) && value.equals(depth)) {
+                result = true;
+            } else if (HEIGHT.toString().equals(key) && value.equals(height)) {
+                result = true;
+            } else if (WIDTH.toString().equals(key) && value.equals(width)) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override

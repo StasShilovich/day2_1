@@ -4,49 +4,30 @@ package com.shilovich.day2_1.dao.impl;
 import com.shilovich.day2_1.dao.ApplianceDAO;
 import com.shilovich.day2_1.dao.FileReaderDAO;
 import com.shilovich.day2_1.dao.exception.DaoException;
-import com.shilovich.day2_1.dao.factory.FileReaderFactory;
-import com.shilovich.day2_1.dao.factory.ParserDAOFactory;
+import com.shilovich.day2_1.dao.factory.DAOFactory;
 import com.shilovich.day2_1.dao.parser.ParserDAO;
 import com.shilovich.day2_1.entity.Appliance;
 import com.shilovich.day2_1.entity.criteria.Criteria;
 
 import java.util.List;
-import java.util.Map;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
 
     @Override
     public Appliance find(Criteria criteria) throws DaoException {
-        FileReaderFactory readerFactory = FileReaderFactory.getInstance();
-        FileReaderDAO readerDAO = readerFactory.getFileReaderDAO();
+        DAOFactory factory = DAOFactory.getInstance();
+        FileReaderDAO readerDAO = factory.getReaderDAO();
         List<String> applianceListString = readerDAO.receive(criteria.getGroupSearchName());
 
-        ParserDAOFactory parserFactory = ParserDAOFactory.getInstance();
-        ParserDAO parserDAO = parserFactory.getParserDAO();
-        parserDAO.parseList(criteria.getCriteria())
-        Map<String, Object> criteriaMap = criteria.getCriteria();
+        ParserDAO parserDAO = factory.getParserDAO();
+        Appliance result = null;
         for (String string : applianceListString) {
-
-            Appliance appliance1 = parserDAO.parseString(string);
-//            int criteriaMapSize = criteriaMap.size();
-//            int counter = 0;
-//
-//            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
-//                String key = entry.getKey();
-//                String value = entry.getValue();
-//                if (criteriaMap.containsKey(key) && criteriaMap.get(key).equals(value)) {
-//                    counter++;
-//                }
-//            }
-//
-//            if (criteriaMapSize == counter) {
-//                Appliance appliance = parserDAO.parseList(stringMap);
-//                System.out.println(appliance);
-//                return appliance;
-//            }
-
+            Appliance appliance = parserDAO.parseString(string);
+            if (appliance.accordToAppliance(criteria.getCriteria())) {
+                result = appliance;
+            }
         }
-        return new Appliance();
+        return result;
     }
 
     // you may add your own code here

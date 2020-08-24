@@ -1,6 +1,12 @@
-package com.shilovich.day2_1.entity;
+package com.shilovich.day2_1.entity.impl;
 
-public class Laptop extends Appliance {
+import com.shilovich.day2_1.entity.Appliance;
+
+import java.util.Map;
+
+import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Laptop.*;
+
+public class Laptop implements Appliance {
     private double batteryCapacity;
     private String os;
     private long memoryRom;
@@ -66,6 +72,29 @@ public class Laptop extends Appliance {
 
     public void setDisplayInches(int displayInches) {
         this.displayInches = displayInches;
+    }
+
+    @Override
+    public boolean accordToAppliance(Map<String, Object> data) {
+        boolean result = false;
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
+                result = true;
+            } else if (OS.toString().equals(key) && value.equals(os)) {
+                result = true;
+            } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
+                result = true;
+            } else if (SYSTEM_MEMORY.toString().equals(key) && value.equals(systemMemory)) {
+                result = true;
+            } else if (CPU.toString().equals(key) && value.equals(cpu)) {
+                result = true;
+            } else if (DISPLAY_INCHS.toString().equals(key) && value.equals(displayInches)) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override

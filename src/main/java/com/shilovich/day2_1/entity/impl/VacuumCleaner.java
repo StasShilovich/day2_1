@@ -1,6 +1,12 @@
-package com.shilovich.day2_1.entity;
+package com.shilovich.day2_1.entity.impl;
 
-public class VacuumCleaner extends Appliance {
+import com.shilovich.day2_1.entity.Appliance;
+
+import java.util.Map;
+
+import static com.shilovich.day2_1.entity.criteria.SearchCriteria.VacuumCleaner.*;
+
+public class VacuumCleaner implements Appliance {
     private int powerConsumption;
     private String filterType;
     private String bagType;
@@ -69,15 +75,38 @@ public class VacuumCleaner extends Appliance {
     }
 
     @Override
+    public boolean accordToAppliance(Map<String, Object> data) {
+        boolean result = false;
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
+                result = true;
+            } else if (FILTER_TYPE.toString().equals(key) && value.equals(filterType)) {
+                result = true;
+            } else if (BAG_TYPE.toString().equals(key) && value.equals(bagType)) {
+                result = true;
+            } else if (WAND_TYPE.toString().equals(key) && value.equals(wandType)) {
+                result = true;
+            } else if (MOTOR_SPEED_REGULATION.toString().equals(key) && value.equals(motorSpeedRegulation)) {
+                result = true;
+            } else if (CLEANING_WIDTH.toString().equals(key) && value.equals(cleaningWidth)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         VacuumCleaner that = (VacuumCleaner) o;
-        if (powerConsumption != that.powerConsumption){
+        if (powerConsumption != that.powerConsumption) {
             return false;
         }
         if (motorSpeedRegulation != that.motorSpeedRegulation) {
@@ -89,7 +118,7 @@ public class VacuumCleaner extends Appliance {
         if (filterType != null ? !filterType.equals(that.filterType) : that.filterType != null) {
             return false;
         }
-        if (bagType != null ? !bagType.equals(that.bagType) : that.bagType != null){
+        if (bagType != null ? !bagType.equals(that.bagType) : that.bagType != null) {
             return false;
         }
         return wandType != null ? wandType.equals(that.wandType) : that.wandType == null;

@@ -1,6 +1,12 @@
-package com.shilovich.day2_1.entity;
+package com.shilovich.day2_1.entity.impl;
 
-public class Speakers extends Appliance {
+import com.shilovich.day2_1.entity.Appliance;
+
+import java.util.Map;
+
+import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Speakers.*;
+
+public class Speakers implements Appliance {
     private int powerConsumption;
     private int numberOfSpeakers;
     private String frequencyRange;
@@ -46,6 +52,25 @@ public class Speakers extends Appliance {
 
     public void setCordLength(int cordLength) {
         this.cordLength = cordLength;
+    }
+
+    @Override
+    public boolean accordToAppliance(Map<String, Object> data) {
+        boolean result = false;
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
+                result = true;
+            } else if (NUMBER_OF_SPEAKERS.toString().equals(key) && value.equals(numberOfSpeakers)) {
+                result = true;
+            } else if (FREQUENCY_RANGE.toString().equals(key) && value.equals(frequencyRange)) {
+                result = true;
+            } else if (CORD_LENGTH.toString().equals(key) && value.equals(cordLength)) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override

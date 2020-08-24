@@ -1,6 +1,12 @@
-package com.shilovich.day2_1.entity;
+package com.shilovich.day2_1.entity.impl;
 
-public class TabletPC extends Appliance {
+import com.shilovich.day2_1.entity.Appliance;
+
+import java.util.Map;
+
+import static com.shilovich.day2_1.entity.criteria.SearchCriteria.TabletPC.*;
+
+public class TabletPC implements Appliance {
     private double batteryCapacity;
     private int displayInches;
     private long memoryRom;
@@ -56,6 +62,27 @@ public class TabletPC extends Appliance {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean accordToAppliance(Map<String, Object> data) {
+        boolean result = false;
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
+                result = true;
+            } else if (DISPLAY_INCHES.toString().equals(key) && value.equals(displayInches)) {
+                result = true;
+            } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
+                result = true;
+            } else if (FLASH_MEMORY_CAPACITY.toString().equals(key) && value.equals(flashMemoryCapacity)) {
+                result = true;
+            } else if (COLOR.toString().equals(key) && value.equals(color)) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override

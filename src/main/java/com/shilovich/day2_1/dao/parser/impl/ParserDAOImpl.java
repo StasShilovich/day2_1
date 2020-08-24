@@ -3,11 +3,9 @@ package com.shilovich.day2_1.dao.parser.impl;
 import com.shilovich.day2_1.dao.exception.DaoException;
 import com.shilovich.day2_1.dao.parser.ParserDAO;
 import com.shilovich.day2_1.entity.*;
-import com.shilovich.day2_1.entity.criteria.Criteria;
+import com.shilovich.day2_1.entity.impl.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 // TODO: 18.08.2020 refactor static import

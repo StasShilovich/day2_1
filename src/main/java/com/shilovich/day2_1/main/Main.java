@@ -6,11 +6,12 @@ import com.shilovich.day2_1.entity.Appliance;
 import com.shilovich.day2_1.entity.criteria.Criteria;
 import com.shilovich.day2_1.service.ApplianceService;
 import com.shilovich.day2_1.service.ServiceFactory;
+import com.shilovich.day2_1.service.exception.ServiceException;
 
 public class Main {
 
     public static void main(String[] args) {
-        Appliance appliance;
+        Appliance appliance = null;
 
         ServiceFactory factory = ServiceFactory.getInstance();
         ApplianceService service = factory.getApplianceService();
@@ -20,7 +21,11 @@ public class Main {
         Criteria criteriaOven = new Criteria(Oven.class.getSimpleName());//"Oven"
         criteriaOven.add(Oven.CAPACITY.toString(), 32);
 
-        appliance = service.find(criteriaOven);
+        try {
+            appliance = service.find(criteriaOven);
+        } catch (ServiceException e) {
+            System.out.println(e.getMessage());
+        }
 
         PrintApplianceInfo.print(appliance);
 
@@ -30,7 +35,11 @@ public class Main {
         criteriaOven.add(Oven.HEIGHT.toString(), 200);
         criteriaOven.add(Oven.DEPTH.toString(), 300);
 
-        appliance = service.find(criteriaOven);
+        try {
+            appliance = service.find(criteriaOven);
+        } catch (ServiceException e) {
+            System.out.println(e.getMessage());
+        }
 
         PrintApplianceInfo.print(appliance);
 
@@ -41,10 +50,12 @@ public class Main {
         criteriaTabletPC.add(TabletPC.DISPLAY_INCHES.toString(), 14);
         criteriaTabletPC.add(TabletPC.MEMORY_ROM.toString(), 3);
 
-        appliance = service.find(criteriaTabletPC);// find(Object...obj)
+        try {
+            appliance = service.find(criteriaTabletPC);// find(Object...obj)
+        } catch (ServiceException e) {
+            System.out.println(e.getMessage());
+        }
 
         PrintApplianceInfo.print(appliance);
-
     }
-
 }
