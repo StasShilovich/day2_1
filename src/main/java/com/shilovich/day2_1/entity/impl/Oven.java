@@ -1,7 +1,6 @@
 package com.shilovich.day2_1.entity.impl;
 
 import com.shilovich.day2_1.entity.Appliance;
-
 import java.util.Map;
 
 import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Oven.*;
@@ -75,26 +74,15 @@ public class Oven implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                count++;
-            } else if (WEIGHT.toString().equals(key) && value.equals(weight)) {
-                count++;
-            } else if (CAPACITY.toString().equals(key) && value.equals(capacity)) {
-                count++;
-            } else if (DEPTH.toString().equals(key) && value.equals(depth)) {
-                count++;
-            } else if (HEIGHT.toString().equals(key) && value.equals(height)) {
-                count++;
-            } else if (WIDTH.toString().equals(key) && value.equals(width)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        Oven oven = new Oven();
+        oven.setPowerConsumption(Integer.parseInt(data.get(POWER_CONSUMPTION.toString())));
+        oven.setWeight(Integer.parseInt(data.get(WEIGHT.toString())));
+        oven.setCapacity(Integer.parseInt(data.get(CAPACITY.toString())));
+        oven.setDepth(Integer.parseInt(data.get(DEPTH.toString())));
+        oven.setHeight(Double.parseDouble(data.get(HEIGHT.toString())));
+        oven.setWidth(Double.parseDouble(data.get(WIDTH.toString())));
+        return oven;
     }
 
     @Override

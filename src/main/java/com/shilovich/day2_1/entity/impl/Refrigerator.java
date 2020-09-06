@@ -75,26 +75,15 @@ public class Refrigerator implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                count++;
-            } else if (WEIGHT.toString().equals(key) && value.equals(weight)) {
-                count++;
-            } else if (FREEZER_CAPACITY.toString().equals(key) && value.equals(freezerCapacity)) {
-                count++;
-            } else if (OVERALL_CAPACITY.toString().equals(key) && value.equals(overallCapacity)) {
-                count++;
-            } else if (HEIGHT.toString().equals(key) && value.equals(height)) {
-                count++;
-            } else if (WIDTH.toString().equals(key) && value.equals(width)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        Refrigerator refrigerator = new Refrigerator();
+        refrigerator.setPowerConsumption(Integer.parseInt(data.get(POWER_CONSUMPTION.toString())));
+        refrigerator.setWeight(Integer.parseInt(data.get(WEIGHT.toString())));
+        refrigerator.setFreezerCapacity(Integer.parseInt(data.get(FREEZER_CAPACITY.toString())));
+        refrigerator.setOverallCapacity(Double.parseDouble(data.get(OVERALL_CAPACITY.toString())));
+        refrigerator.setHeight(Double.parseDouble(data.get(HEIGHT.toString())));
+        refrigerator.setWeight(Integer.parseInt(data.get(WIDTH.toString())));
+        return refrigerator;
     }
 
     @Override

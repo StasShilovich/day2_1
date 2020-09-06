@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static com.shilovich.day2_1.entity.criteria.SearchCriteria.Speakers.*;
 
+
 public class Speakers implements Appliance {
     private int powerConsumption;
     private int numberOfSpeakers;
@@ -55,22 +56,13 @@ public class Speakers implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                count++;
-            } else if (NUMBER_OF_SPEAKERS.toString().equals(key) && value.equals(numberOfSpeakers)) {
-                count++;
-            } else if (FREQUENCY_RANGE.toString().equals(key) && frequencyRange.equalsIgnoreCase((String) value)) {
-                count++;
-            } else if (CORD_LENGTH.toString().equals(key) && value.equals(cordLength)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        Speakers speakers = new Speakers();
+        speakers.setPowerConsumption(Integer.parseInt(data.get(POWER_CONSUMPTION.toString())));
+        speakers.setNumberOfSpeakers(Integer.parseInt(data.get(NUMBER_OF_SPEAKERS.toString())));
+        speakers.setFrequencyRange(data.get(FREQUENCY_RANGE.toString()));
+        speakers.setCordLength(Integer.parseInt(data.get(CORD_LENGTH.toString())));
+        return speakers;
     }
 
     @Override
@@ -113,4 +105,6 @@ public class Speakers implements Appliance {
         builder.append('}');
         return builder.toString();
     }
+
+
 }

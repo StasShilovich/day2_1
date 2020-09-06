@@ -65,24 +65,14 @@ public class TabletPC implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
-                count++;
-            } else if (DISPLAY_INCHES.toString().equals(key) && value.equals(displayInches)) {
-                count++;
-            } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
-                count++;
-            } else if (FLASH_MEMORY_CAPACITY.toString().equals(key) && value.equals(flashMemoryCapacity)) {
-                count++;
-            } else if (COLOR.toString().equals(key) && color.equalsIgnoreCase((String) value)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        TabletPC tabletPC = new TabletPC();
+        tabletPC.setBatteryCapacity(Double.parseDouble(data.get(BATTERY_CAPACITY.toString())));
+        tabletPC.setDisplayInches(Integer.parseInt(data.get(DISPLAY_INCHES.toString())));
+        tabletPC.setMemoryRom(Long.parseLong(data.get(MEMORY_ROM.toString())));
+        tabletPC.setFlashMemoryCapacity(Integer.parseInt(data.get(FLASH_MEMORY_CAPACITY.toString())));
+        tabletPC.setColor(data.get(COLOR.toString()));
+        return tabletPC;
     }
 
     @Override

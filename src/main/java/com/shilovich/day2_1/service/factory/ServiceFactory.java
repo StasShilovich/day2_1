@@ -1,5 +1,6 @@
-package com.shilovich.day2_1.service;
+package com.shilovich.day2_1.service.factory;
 
+import com.shilovich.day2_1.service.ApplianceService;
 import com.shilovich.day2_1.service.impl.ApplianceServiceImpl;
 import com.shilovich.day2_1.service.validation.Validator;
 import com.shilovich.day2_1.service.validation.impl.ValidatorImpl;

@@ -75,26 +75,15 @@ public class VacuumCleaner implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (POWER_CONSUMPTION.toString().equals(key) && value.equals(powerConsumption)) {
-                count++;
-            } else if (FILTER_TYPE.toString().equals(key) && filterType.equalsIgnoreCase((String) value)) {
-                count++;
-            } else if (BAG_TYPE.toString().equals(key) && bagType.equalsIgnoreCase((String) value)) {
-                count++;
-            } else if (WAND_TYPE.toString().equals(key) && wandType.equalsIgnoreCase((String) value)) {
-                count++;
-            } else if (MOTOR_SPEED_REGULATION.toString().equals(key) && value.equals(motorSpeedRegulation)) {
-                count++;
-            } else if (CLEANING_WIDTH.toString().equals(key) && value.equals(cleaningWidth)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        VacuumCleaner vacuumCleaner = new VacuumCleaner();
+        vacuumCleaner.setPowerConsumption(Integer.parseInt(data.get(POWER_CONSUMPTION.toString())));
+        vacuumCleaner.setFilterType(data.get(FILTER_TYPE.toString()));
+        vacuumCleaner.setBagType(data.get(BAG_TYPE.toString()));
+        vacuumCleaner.setWandType(data.get(WAND_TYPE.toString()));
+        vacuumCleaner.setMotorSpeedRegulation(Integer.parseInt(data.get(MOTOR_SPEED_REGULATION.toString())));
+        vacuumCleaner.setCleaningWidth(Integer.parseInt(data.get(CLEANING_WIDTH.toString())));
+        return vacuumCleaner;
     }
 
     @Override

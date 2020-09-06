@@ -1,9 +1,8 @@
 package com.shilovich.day2_1.entity.criteria;
 
 public final class SearchCriteria {
-
     public enum Oven {
-        POWER_CONSUMPTION, WEIGHT, CAPACITY, DEPTH, HEIGHT, WIDTH
+        POWER_CONSUMPTION, WEIGHT, CAPACITY, DEPTH, HEIGHT, WIDTH;
     }
 
     public enum Laptop {

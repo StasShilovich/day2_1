@@ -5,7 +5,7 @@ import static com.shilovich.day2_1.entity.criteria.SearchCriteria.*;
 import com.shilovich.day2_1.entity.Appliance;
 import com.shilovich.day2_1.entity.criteria.Criteria;
 import com.shilovich.day2_1.service.ApplianceService;
-import com.shilovich.day2_1.service.ServiceFactory;
+import com.shilovich.day2_1.service.factory.ServiceFactory;
 import com.shilovich.day2_1.service.exception.ServiceException;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
 
         //////////////////////////////////////////////////////////////////
 
-        Criteria criteriaOven = new Criteria(Oven.class.getSimpleName());//"Oven"
+        Criteria criteriaOven = new Criteria(Oven.class.getSimpleName());
         criteriaOven.add(Oven.CAPACITY.toString(), 32);
 
         try {
@@ -51,7 +51,7 @@ public class Main {
         criteriaTabletPC.add(TabletPC.MEMORY_ROM.toString(), 8000L);
 
         try {
-            appliance = service.find(criteriaTabletPC);// find(Object...obj)
+            appliance = service.find(criteriaTabletPC);
         } catch (ServiceException e) {
             System.out.println(e.getMessage());
         }

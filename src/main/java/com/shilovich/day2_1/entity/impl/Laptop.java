@@ -75,26 +75,15 @@ public class Laptop implements Appliance {
     }
 
     @Override
-    public boolean accordToAppliance(Map<String, Object> data) {
-        int count = 0;
-        for (Map.Entry<String, Object> entry : data.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (BATTERY_CAPACITY.toString().equals(key) && value.equals(batteryCapacity)) {
-                count++;
-            } else if (OS.toString().equals(key) && os.equalsIgnoreCase((String) value)) {
-                count++;
-            } else if (MEMORY_ROM.toString().equals(key) && value.equals(memoryRom)) {
-                count++;
-            } else if (SYSTEM_MEMORY.toString().equals(key) && value.equals(systemMemory)) {
-                count++;
-            } else if (CPU.toString().equals(key) && value.equals(cpu)) {
-                count++;
-            } else if (DISPLAY_INCHS.toString().equals(key) && value.equals(displayInches)) {
-                count++;
-            }
-        }
-        return count == data.size();
+    public Appliance createFromMap(Map<String, String> data) {
+        Laptop laptop = new Laptop();
+        laptop.setBatteryCapacity(Double.parseDouble(data.get(BATTERY_CAPACITY.toString())));
+        laptop.setOs(data.get(OS.toString()));
+        laptop.setMemoryRom(Long.parseLong(data.get(MEMORY_ROM.toString())));
+        laptop.setSystemMemory(Integer.parseInt(data.get(SYSTEM_MEMORY.toString())));
+        laptop.setCpu(Double.parseDouble(data.get(CPU.toString())));
+        laptop.setDisplayInches(Integer.parseInt(data.get(DISPLAY_INCHS.toString())));
+        return laptop;
     }
 
     @Override
